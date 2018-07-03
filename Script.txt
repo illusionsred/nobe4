@@ -1,0 +1,14 @@
+function filterViaSpam() {
+  var threads = GmailApp.getInboxThreads(0, 10);
+  for (var i = 0; i < threads.length; i++) {
+    var messages=threads[i].getMessages();
+    for (var j = 0; j < messages.length; j++) {
+      var message=messages[j];
+      var body=message.getRawContent();
+      if(body.indexOf("phishtest.knowbe4.com")>-1){
+        GmailApp.moveThreadToSpam(threads[i]);
+      }
+      Utilities.sleep(1000);
+    }
+  }
+}
